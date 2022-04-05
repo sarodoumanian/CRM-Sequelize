@@ -1,7 +1,7 @@
 const express = require("express");
 const hourController = require("../controllers/hourController");
 const router = express.Router();
-const { empAuth } = require("../auth/auth");
+const { empAuth, manAuth } = require("../auth/auth");
 
 router.post("/", empAuth, hourController.CreateHour);
 
@@ -13,8 +13,8 @@ router.get("/allHours", empAuth, hourController.GetAllHoursByAllUser);
 
 router.get("/:userId", empAuth, hourController.GetAllHoursByUser);
 
-router.delete("/:id", empAuth, hourController.DeleteHour);
+router.delete("/:id", manAuth, hourController.DeleteHour);
 
-router.patch("/", empAuth, hourController.ApproveLoggedHours);
+router.patch("/", manAuth, hourController.ApproveLoggedHours);
 
 module.exports = router;
